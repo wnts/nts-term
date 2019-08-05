@@ -18,18 +18,18 @@ void x_keyboard_init(xcb_connection_t * c, const xcb_setup_t * setup, x_keyboard
 {
 	/* Get keyboard keymap */
 	x_keyboard_map_get(c, setup, &keyboard_settings->keymap, &keyboard_settings->keysyms_per_keycode);
-	x_keyboard_map_print(setup->min_keycode, setup->max_keycode - setup->min_keycode + 1, keyboard_settings->keymap, keyboard_settings->keysyms_per_keycode);
+	//x_keyboard_map_print(setup->min_keycode, setup->max_keycode - setup->min_keycode + 1, keyboard_settings->keymap, keyboard_settings->keysyms_per_keycode);
 
 	/* Get keyboard modifier map */
 	x_keyboard_modifiers_get(c, setup, &keyboard_settings->modmap, &keyboard_settings->keycodes_per_modifier);
-	x_keyboard_modifiers_print(keyboard_settings->modmap, keyboard_settings->keycodes_per_modifier);
+	//x_keyboard_modifiers_print(keyboard_settings->modmap, keyboard_settings->keycodes_per_modifier);
 	/* Get modifier associated with numlock, caps lock */
 	keyboard_settings->modifier_numlock = x_keyboard_keysym_to_modifier(XK_Num_Lock, setup, keyboard_settings);
 	keyboard_settings->modifier_capslock = x_keyboard_keysym_to_modifier(XK_Caps_Lock, setup, keyboard_settings);
 	keyboard_settings->modifier_shiftlock = x_keyboard_keysym_to_modifier(XK_Shift_Lock, setup, keyboard_settings);
-	printf("keyboard modifier for numlock: %s\n", modifier_names[keyboard_settings->modifier_numlock]);
-	printf("keyboard modifier for caps lock: %s\n", modifier_names[keyboard_settings->modifier_shiftlock]);
-	printf("keyboard modifier for shift lock: %s\n", modifier_names[keyboard_settings->modifier_capslock]);
+	//printf("keyboard modifier for numlock: %s\n", modifier_names[keyboard_settings->modifier_numlock]);
+	//printf("keyboard modifier for caps lock: %s\n", modifier_names[keyboard_settings->modifier_shiftlock]);
+	//printf("keyboard modifier for shift lock: %s\n", modifier_names[keyboard_settings->modifier_capslock]);
 }
 
 void x_keyboard_map_get(xcb_connection_t * c, const xcb_setup_t *setup, xcb_keysym_t **keymap, uint8_t * keysyms_per_keycode)

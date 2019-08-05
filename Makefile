@@ -1,6 +1,6 @@
 CDEBUG=-g
-CFLAGS=$(CDEBUG) -I. -D_XOPEN_SOURCE=700
-SRCS_C = nts-term.c keyboard.c unicode.c
+CFLAGS=$(CDEBUG) -I. -Ix -D_XOPEN_SOURCE=700
+SRCS_C = nts-term.c x/keyboard.c unicode.c x/font.c x/common.c
 OBJS = $(SRCS_C:.c=.o)
 LIBS=-lxcb
 
