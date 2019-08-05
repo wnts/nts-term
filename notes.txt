@@ -1,0 +1,25 @@
+1. Unicode/ISO-10646 support
+    1.1 Input (Keyboard)
+        - The keycode to keysym conversion using the server-side keyboard map results
+          in one of the keysyms defined in X11/keysymdef.h. 
+          From inspecting the file and its comments, these are all 29-bit numbers that mostly correspond
+          to Unicode codepoints (i.e. UCS-4 with the 3 MSB set to zero). This is indicated by a C comment giving the relevant codepoint.
+          Since everything on pretty much all Unixes uses utf-8, we should store them as utf-8 characters in the input buffer that will be 
+          sent to the pty. Non utf-8 systems come mostly in two flavours: 1)legacy ASCII systems, with which UTF-8 is compatible, and 2)all other systems using obscure encodings, screw them.
+          For rendering them however, we need to convert these to UCS-4 values, or at least get the 2 LSB of the UCS-4 representation from the UTF-8 representation.
+    1.2 Output (Fonts)
+        - In the first version we try to KISS and minimize library dependencies so we use server-side fonts. ISO-10646 compliant server fonts exists, with some limitations.
+          Those fonts' XLFD 'CHARSET_REGISTRY' name element is set to iso10646-x where x seems to be the unicode plane. So fonts can at most 
+          contain glyphs for one unicode plane. This is consequence of the 16 bit indexing used for server-side X protocol fonts.
+          It's the users responsibility to select a font that can represent characters from the correct unicode plane.
+          If you want to render text that contains characters from multiple unicode planes, you would have to employ
+          multiple fonts (constantly switching between fonts), which the user would have to select. 
+          This seems ridiculously exotic, so we'll stick to one font (and thus one unicode plane).
+        - With this said, its also pretty obvious we won't be supporting combining unicode characters. 
+          In essence, we'll offer something similar to UCS level 1.
+        -
+    
+        
+    
+        
+  
